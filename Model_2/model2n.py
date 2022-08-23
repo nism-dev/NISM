@@ -1,6 +1,12 @@
+# NISM (New Internet Security Model) - Model 2 Simulation
+# Test Version 0.2.2
+
+# Import needed libraries (Math, Random)
 import math as m
 import random as r
 
+# Function for generating primes in the form of 6n - 1
+# Generates prime based on the parameters given as minimum/maximum value
 def genPrime(min, max):
     c = False
     d = False
@@ -10,6 +16,8 @@ def genPrime(min, max):
         d = isPrime(6*q-1)
     return 6*q-1
 
+# Function for determining if a number p is prime
+# Returns True/False
 def isPrime(p):
     c = True
     for i in range(2, p):
@@ -17,6 +25,8 @@ def isPrime(p):
             c = False
     return c
 
+# Function for splitting integer n to k parts
+# Returns list of integers
 def splitInt(n, k):
     fL = []
     for i in range(0, k-1):
@@ -26,6 +36,8 @@ def splitInt(n, k):
     fL.append(n)
     return fL
 
+# Function for factorizing integer m
+# Returns list of factors(int)
 def fac(m):
     fL = []
     for i in range(1, m+1):
@@ -33,6 +45,9 @@ def fac(m):
             fL.append(i)
     return fL
 
+# Function for sending data to reciever
+# Parameters: s(Original data), rL(List of route lengths)
+# Returns recovered data S
 def sender(s, rL, mins, maxs):
     print("\nfunction_sender() starting..")
     p = genPrime(mins, maxs)
@@ -53,6 +68,9 @@ def sender(s, rL, mins, maxs):
     print("\n\nFinal Result :: ", nS)
     return nS
 
+# Function importing result for recieving data  - Part A
+# Parameters: raa(Data sent from Route 1), rab(Data sent from Route 2), rac(Data sent from Route 3)
+# Returns list of two primes(p, q)
 def reca(raa, rab, rac):
     print("\nfunction_reca() starting..")
     sp = raa+rab+rac
@@ -65,12 +83,14 @@ def reca(raa, rab, rac):
     print("variable_primes => ", [p, q])
     return [p, q]
 
+# Function for importing result for recieving data - Part B
+# Parameters: rba(e1), rbb(e2), rbc(e3), pL(List of primes(p, q)), rL(List of Route Lengths)
+# Reuturns list of recovered data
 def recb(rba, rbb, rbc, pL, rL):
     print("\nfunction_recb() starting..")
     dL = []
     rbL = [rba, rbb, rbc]
     for i in range(0, 3):
-        # l = (-rL[i]*(pL[0]**2+pL[1]**2)+m.sqrt((rL[i]**2)*((pL[0]**2+pL[1]**2)**2)-4*pL[0]*pL[1]*(pL[0]*pL[1]*rL[i]*rL[i]-rbL[i])))/(2*pL[0]*pL[1])
         pS = (pL[0]**2)+(pL[1]**2)
         la = pS*rL[i]
         lb = (rL[i]**2)*(pS**2)
@@ -136,7 +156,6 @@ def tF():
         if mL[l] != 'Success':
             fL.append(l+1)
     return [u, fL]
-
         
 y = tF()
 u = y[0]

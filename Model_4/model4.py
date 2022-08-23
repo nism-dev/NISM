@@ -55,7 +55,8 @@ for i in range(0, len(coordList)):
   tempNodeList = []
   for j in range(0, lenC):
     tempNodeList.append(nodeList[i*lenC+j])
-  print(coordList[i], "  -----> ", tempNodeList)
+  # print(coordList[i], "  -----> ", tempNodeList)
+  print(coordList[i])
 
 print("")
 senderIndex = int(input("Index of sender: "))
@@ -68,6 +69,7 @@ for x in range(0, lenC):
       rCred = [x+1, y+1]
 cred = [sCred, rCred]
 credR1 = cred[0]
+credR12 = cred[1]
 print("S, R Cred = ", cred)
 # if x + y = 1 (mod 2) --> can go up
 # if x + y = 0 (mod 2) --> can go dwn
@@ -153,7 +155,10 @@ for i in range(0, len(passedRoute)):
   if i % 2 == 0:
     tempList = [passedRoute[i], passedRoute[i+1]]
     passedRouteList.append(tempList)
+passedRouteList.append(credR12)
 print("Passed Routes: ", passedRouteList)
+
+passedRouteList.pop(-1)
 resultFile.writelines(str(passedRouteList)+"#")
 
 def isRoutePassed(coord, passedRouteListR):
@@ -346,7 +351,7 @@ while currentPosR1 != [cred[1][0], cred[1][1]]:
 print("Current Position: ", currentPosR1)
 print("Process completed for :: Route 1 (RIGHT ROUTE)")
 # print(passedRoute)
-passedRouteListR1 = []
+passedRouteListR1 = [credR1]
 for i in range(0, len(passedRouteR1)):
   if i % 2 == 0:
     tempListR1 = [passedRouteR1[i], passedRouteR1[i+1]]
